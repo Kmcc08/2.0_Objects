@@ -39,10 +39,13 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
+	public Image astro2Pic;
+	public Image BackgroundPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
+	private Astronaut astro2;
 
 
    // Main method definition
@@ -63,8 +66,12 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
+		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png");
+		astro2Pic = Toolkit.getDefaultToolkit().getImage("download.png");//load the picture
+		BackgroundPic = Toolkit.getDefaultToolkit().getImage("BouncyCastle.jpg");
 		astro = new Astronaut(10,100);
+		astro2 = new Astronaut( 600,600);
+
 
 
 	}// BasicGameApp()
@@ -89,10 +96,23 @@ public class BasicGameApp implements Runnable {
 	}
 
 
-	public void moveThings()
-	{
-      //calls the move( ) code in the objects
-		astro.move();
+	public void moveThings(){
+
+      //calls the move( ) code in the object
+		collisions();
+		astro.bounce();
+		astro2.bounce();
+
+	}
+
+	public void collisions(){
+     if(astro.rec.intersects(astro2.rec)){
+		 System.out.println(" explosion!!!!!!! ");
+		 astro.dx = -astro.dx;
+		 astro.dy = -astro.dy;
+		 astro2.dx = -astro2.dx;
+		 astro2.dy = -astro2.dy;
+	 }
 
 	}
 	
@@ -142,7 +162,9 @@ public class BasicGameApp implements Runnable {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the astronaut
+		//draw the image of the astronaut
+		g.drawImage(BackgroundPic, 0, 0, WIDTH, HEIGHT, null);
+		g.drawImage(astro2Pic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 
 		g.dispose();
@@ -150,3 +172,4 @@ public class BasicGameApp implements Runnable {
 		bufferStrategy.show();
 	}
 }
+
