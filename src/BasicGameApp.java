@@ -103,6 +103,7 @@ public class BasicGameApp implements Runnable {
 		astro.bounce();
 		astro2.bounce();
 
+
 	}
 
 	public void collisions(){
@@ -112,7 +113,13 @@ public class BasicGameApp implements Runnable {
 		 astro.dy = -astro.dy;
 		 astro2.dx = -astro2.dx;
 		 astro2.dy = -astro2.dy;
+		 astro2.dx = 8;
+		 astro2.dy = 16;
+		 astro.width = 100;
+		 astro.height = 100;
 	 }
+
+
 
 	}
 	
