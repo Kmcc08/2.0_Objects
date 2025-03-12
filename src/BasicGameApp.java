@@ -13,6 +13,8 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -22,7 +24,8 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+// step 1 add KeyListener to the implements
+public class BasicGameApp implements Runnable, KeyListener {
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -39,13 +42,10 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
-	public Image astro2Pic;
-	public Image BackgroundPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
-	private Astronaut astro2;
 
 
    // Main method definition
@@ -66,12 +66,8 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("pepperoni.jpg");
-		astro2Pic = Toolkit.getDefaultToolkit().getImage("pineapple.jpg");//load the picture
-		BackgroundPic = Toolkit.getDefaultToolkit().getImage("pizza.jpg");
+		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
-		astro2 = new Astronaut( 600,600);
-
 
 
 	}// BasicGameApp()
@@ -96,33 +92,10 @@ public class BasicGameApp implements Runnable {
 	}
 
 
-	public void moveThings(){
-
-      //calls the move( ) code in the object
-		collisions();
-		astro.bounce();
-		astro2.bounce();
-
-
-	}
-
-	public void collisions(){
-     if(astro.rec.intersects(astro2.rec) && astro.isCrashing == false){
-		 System.out.println(" explosion!!!!!!! ");
-		 astro.dx = -astro.dx;
-		 astro.dy = -astro.dy;
-		 astro2.dx = -astro2.dx;
-		 astro2.dy = -astro2.dy;
-		 astro2.dx = astro2.dx+2;
-		astro2.dy = astro2.dy+2;
-		 astro.width = astro.width + 20;
-		 astro.height = astro.height + 20;
-		 astro.isCrashing = true;
-	 }
-       if(!astro.rec.intersects(astro2.rec)){
-		   astro.isCrashing = false;
-	   }
-
+	public void moveThings()
+	{
+      //calls the move( ) code in the objects
+		astro.move();
 
 	}
 	
@@ -149,6 +122,8 @@ public class BasicGameApp implements Runnable {
       canvas = new Canvas();  
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
+// step 2 add keylistner to canvas as this
+	   canvas.addKeyListener(this);
    
       panel.add(canvas);  // adds the canvas to the panel.
    
@@ -172,14 +147,28 @@ public class BasicGameApp implements Runnable {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-		//draw the image of the astronaut
-		g.drawImage(BackgroundPic, 0, 0, WIDTH, HEIGHT, null);
-		g.drawImage(astro2Pic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
+      //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 
 		g.dispose();
 
 		bufferStrategy.show();
 	}
-}
 
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyChar());
+		System.out.println(e.getKeyCode());
+	}
+// hw: identify key codes for up down left and right arrow keys
+	@Override
+	public void keyReleased(KeyEvent e) {
+
+	}
+	// ad step 3 add methods keyReleased, keyPressed, and keyType
+}

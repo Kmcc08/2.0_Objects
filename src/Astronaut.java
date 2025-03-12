@@ -14,9 +14,7 @@ public class Astronaut {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public boolean isAlive;//a boolean to denote if the hero is alive or dead.
-    public Rectangle rec;
-    public boolean isCrashing;
+    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
 
 
     // METHOD DEFINITION SECTION
@@ -30,13 +28,11 @@ public class Astronaut {
     public Astronaut(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =4;
-        dy =8;
+        dx =1;
+        dy =0;
         width = 60;
         height = 60;
         isAlive = true;
-        rec  = new Rectangle(xpos, ypos, width, height);
-        isCrashing = false;
  
     } // constructor
 
@@ -44,66 +40,8 @@ public class Astronaut {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
-
-        rec  = new Rectangle(xpos, ypos, width, height);
+ 
     }
-
-    public void bounce (){
-        if (xpos>1000) {
-            dx=-dx;
-        }
-
-        if (xpos<0) {
-            dx=-dx;
-        }
-        if (ypos>600) {
-            dy=-dy;
-        }
-
-        if (ypos<0) {
-            dy=-dy;
-        }
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-
-        rec  = new Rectangle(xpos, ypos, width, height);
-
-    }
-
-
-
-    public void wrap(){
-
-        if(xpos>1000) {
-            xpos = 0;
-
-        }
-            xpos = xpos + dx;
-            ypos = ypos + dy;
-
-            if(xpos<0){
-               xpos = 1000;
-                xpos = xpos + dx;
-                ypos = ypos + dy;
-            }
-
-            if(ypos>700){
-                 ypos = 0;
-                xpos = xpos + dx;
-                ypos = ypos + dy;
-            }
-
-            if(ypos<0){
-               ypos = 700;
-                xpos = xpos + dx;
-                ypos = ypos + dy;
-            }
-        rec  = new Rectangle(xpos, ypos, width, height);
-    }
-
-
-
-
 }
 
 
