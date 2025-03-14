@@ -14,7 +14,15 @@ public class Astronaut {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+    public boolean isAlive;
+    public Rectangle rec;
+    public boolean up;
+    public boolean down;
+    public boolean left;
+    public boolean right;
+
+
+        //a boolean to denote if the hero is alive or dead.
 
 
     // METHOD DEFINITION SECTION
@@ -28,11 +36,15 @@ public class Astronaut {
     public Astronaut(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =1;
-        dy =0;
+        dx =2;
+        dy =4;
         width = 60;
         height = 60;
         isAlive = true;
+        left =false;
+        up = false;
+        down = false;
+        right = false;
  
     } // constructor
 
@@ -40,7 +52,40 @@ public class Astronaut {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        if(up ==true){
+            dy = -5;
+        }
+        if(down == true){
+            dy = 5;
+        }
+        if(left == true){
+            dx = -5;
+        }
+        if(right == true){
+
+        }
  
+    }
+    public void bounce (){ //this method causes them to switch directions when they intersect
+        if (xpos>1000) {
+            dx=-dx;
+        }
+
+        if (xpos<0) {
+            dx=-dx;
+        }
+        if (ypos>600) {
+            dy=-dy;
+        }
+
+        if (ypos<0) {
+            dy=-dy;
+        }
+        xpos = xpos + dx;
+        ypos = ypos + dy;
+
+        rec  = new Rectangle(xpos, ypos, width, height);
+
     }
 }
 
