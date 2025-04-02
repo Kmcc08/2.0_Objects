@@ -38,6 +38,7 @@ public class Astronaut {
         ypos = pYpos;
         dx =2;
         dy =4;
+
         width = 60;
         height = 60;
         isAlive = true;
@@ -47,6 +48,49 @@ public class Astronaut {
         right = false;
  
     } // constructor
+
+    public void wrap(){  //this method causes one character to wrap by "going through the walls" of the screen instead of bouncing
+
+        if(up==true){
+            dy = -5;
+        }
+        if(down==true){
+            dy=5;
+        }
+        if(left == true){
+            dx=-5;
+        }
+        if(right==true){
+            dx = 5;
+        }
+        if(xpos>1000) {
+            xpos = 0;
+
+        }
+        xpos = xpos + dx;
+        ypos = ypos + dy;
+
+        if(xpos<0){
+            xpos = 1000;
+            xpos = xpos + dx;
+            ypos = ypos + dy;
+        }
+
+        if(ypos>700){
+            ypos = 0;
+            xpos = xpos + dx;
+            ypos = ypos + dy;
+        }
+
+        if(ypos<0){
+            ypos = 700;
+            xpos = xpos + dx;
+            ypos = ypos + dy;
+        }
+        rec  = new Rectangle(xpos, ypos, width, height);
+
+
+    }
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
@@ -87,6 +131,7 @@ public class Astronaut {
         rec  = new Rectangle(xpos, ypos, width, height);
 
     }
+
 }
 
 

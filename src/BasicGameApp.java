@@ -96,7 +96,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	{
       //calls the move( ) code in the objects
 		astro.move();
-		astro.bounce();
+		astro.wrap();
 
 	}
 	
@@ -109,6 +109,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 
 			}
    }
+
 
    //Graphics setup method
    private void setUpGraphics() {
@@ -196,6 +197,21 @@ public class BasicGameApp implements Runnable, KeyListener {
 // hw: identify key codes for up down left and right arrow keys
 	@Override
 	public void keyReleased(KeyEvent e) {
+		System.out.println("released");
+		System.out.println(e.getKeyChar());
+		System.out.println(e.getKeyCode());
+		if(e.getKeyCode() == 38){
+			astro.up = false;
+		}
+		if(e.getKeyCode() == 40){
+			astro.down = false;
+		}
+		if(e.getKeyCode() == 37){
+			astro.left = false;
+		}
+		if(e.getKeyCode() == 38){
+			astro.right = false;
+		}
 
 	}
 
