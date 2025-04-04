@@ -213,6 +213,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 			astro.right = false;
 		}
 
+
 	}
 
 	// ad step 3 add methods keyReleased, keyPressed, and keyType
