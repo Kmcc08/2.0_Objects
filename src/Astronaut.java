@@ -49,7 +49,7 @@ public class Astronaut {
  
     } // constructor
 
-    public void wrap(){  //this method causes one character to wrap by "going through the walls" of the screen instead of bouncing
+public void wrap(){  //this method causes one character to wrap by "going through the walls" of the screen instead of bouncing
 
         if(up==true){
             dy = -5;
