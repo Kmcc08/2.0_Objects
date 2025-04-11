@@ -46,6 +46,7 @@ public class Astronaut {
         up = false;
         down = false;
         right = false;
+        rec=new Rectangle(xpos,ypos,width,height);
  
     } // constructor
 
@@ -108,6 +109,7 @@ public void wrap(){  //this method causes one character to wrap by "going throug
         if(right == true){
 
         }
+        rec=new Rectangle(xpos,ypos,width,height);
  
     }
     public void bounce (){ //this method causes them to switch directions when they intersect

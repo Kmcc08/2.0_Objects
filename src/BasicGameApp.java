@@ -102,8 +102,21 @@ public class BasicGameApp implements Runnable, KeyListener {
       //calls the move( ) code in the objects
 		astro.move();
 		astro.wrap();
+		collisions();
 		for(int y=0; y< astronautArray.length; y++){
 			astronautArray[y].move();
+		}
+
+
+	}
+	public void collisions(){
+
+
+
+		for(int b = 0; b< astronautArray.length; b++){
+			if(astro.rec.intersects(astronautArray[b].rec)){
+				System.out.println("crashing");
+			}
 		}
 
 	}
@@ -178,28 +191,28 @@ public class BasicGameApp implements Runnable, KeyListener {
 		System.out.println(e.getKeyChar());
 		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 38){
-			System.out.println("going up!");
+
 			astro.dy = -5;
 		    astro.dx = 0;
 		}
 		if (e.getKeyCode() == 40){
-			System.out.println("going down!");
+
 			astro.dy = 5;
 			astro.dx = 0;
 		}
 		if (e.getKeyCode() == 39){;
-			System.out.println("going right!");
+
 			astro.dx = 5;
 			astro.dy = 0;
 
 		}
 		if (e.getKeyCode() == 37){
-			System.out.println("going left!");
+
 			astro.dx = -5;
 			astro.dy = 0;
 		}
 		if(e.getKeyCode() == 16){
-			System.out.println("diagnal");
+
 			astro.dy = -5;
 			astro.dx =-5;
 		}
@@ -208,7 +221,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 // hw: identify key codes for up down left and right arrow keys
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("released");
+		
 		System.out.println(e.getKeyChar());
 		System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == 38){
